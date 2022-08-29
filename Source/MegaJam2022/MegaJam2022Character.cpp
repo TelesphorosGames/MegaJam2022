@@ -17,6 +17,7 @@ AMegaJam2022Character::AMegaJam2022Character()
 	GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
 
 	// set our turn rate for input
+	
 	TurnRateGamepad = 50.f;
 
 	// Don't rotate when the controller rotates. Let that just affect the camera.
