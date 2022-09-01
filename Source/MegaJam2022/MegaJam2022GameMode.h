@@ -13,6 +13,10 @@ class AMegaJam2022GameMode : public AGameModeBase
 
 public:
 	AMegaJam2022GameMode();
+
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	bool bInvertYAxis;
 };
 
 

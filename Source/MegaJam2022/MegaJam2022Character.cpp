@@ -13,6 +13,11 @@
 
 AMegaJam2022Character::AMegaJam2022Character()
 {
+
+	bInvertYAxisOnChar = {false};
+
+
+	
 	// Set size for collision capsule
 	GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
 
@@ -70,7 +75,7 @@ void AMegaJam2022Character::SetupPlayerInputComponent(class UInputComponent* Pla
 	// "turnrate" is for devices that we choose to treat as a rate of change, such as an analog joystick
 	PlayerInputComponent->BindAxis("Turn Right / Left Mouse", this, &APawn::AddControllerYawInput);
 	PlayerInputComponent->BindAxis("Turn Right / Left Gamepad", this, &AMegaJam2022Character::TurnAtRate);
-	PlayerInputComponent->BindAxis("Look Up / Down Mouse", this, &APawn::AddControllerPitchInput);
+	PlayerInputComponent->BindAxis("Look Up / Down Mouse", this, &AMegaJam2022Character::LookUpAtRate);
 	PlayerInputComponent->BindAxis("Look Up / Down Gamepad", this, &AMegaJam2022Character::LookUpAtRate);
 
 	// handle touch devices
@@ -97,7 +102,13 @@ void AMegaJam2022Character::TurnAtRate(float Rate)
 void AMegaJam2022Character::LookUpAtRate(float Rate)
 {
 	// calculate delta for this frame from the rate information
-	AddControllerPitchInput(Rate * TurnRateGamepad * GetWorld()->GetDeltaSeconds());
+
+	float InvertedRate = { Rate * -1};
+	
+	bInvertYAxisOnChar ? AddControllerPitchInput(InvertedRate * TurnRateGamepad * GetWorld()->GetDeltaSeconds()) :
+	AddControllerPitchInput(Rate * TurnRateGamepad * GetWorld()->GetDeltaSeconds()) ;
+	
+	
 }
 
 void AMegaJam2022Character::MoveForward(float Value)

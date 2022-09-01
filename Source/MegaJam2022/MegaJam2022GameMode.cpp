@@ -12,4 +12,6 @@ AMegaJam2022GameMode::AMegaJam2022GameMode()
 	{
 		DefaultPawnClass = PlayerPawnBPClass.Class;
 	}
+
+	bInvertYAxis = {false};
 }
